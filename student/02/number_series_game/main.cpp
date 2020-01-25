@@ -6,7 +6,7 @@ int main()
         int n;
         std::cout<<"How many numbers would you like to have? ";
         std::cin>>n;
-        for(int i=1;i<n;i++)
+        for(int i=1;i<=n;i++)
         {
             if(i%3==0)
             {
