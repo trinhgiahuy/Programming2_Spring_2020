@@ -3,10 +3,8 @@
 
 int main()
 {
-    std::cout << "How many numbers would you like to have? ";
-
         int n;
-        std::cout<<"How many numbers would you like to have? "<<std::endl ;
+        std::cout<<"How many numbers would you like to have? ";
         std::cin>>n;
         for(int i=1;i<n;i++)
         {
