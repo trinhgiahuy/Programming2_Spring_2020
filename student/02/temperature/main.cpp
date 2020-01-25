@@ -1,16 +1,16 @@
-#include <iostream>;
-using namespace std;
+#include <iostream>
+
 
 int main()
 {
     int n;
     float t1,t2;
-    cout << "Enter a temperature: ";
-    cin>>n;
+    std::cout << "Enter a temperature: ";
+    std::cin>>n;
     t1=n*1.8+32;
     t2=(n-32)/1.8;
-    cout<<n<<" degrees Celsius is "<<t1<<" degrees Fahrenheit "<<endl;
-    cout<<n<<" degrees Fahrenheit is "<<t2<<" degrees Celsius "<<endl;
+    std::cout<<n<<" degrees Celsius is "<<t1<<" degrees Fahrenheit "<<std::endl;
+    std::cout<<n<<" degrees Fahrenheit is "<<t2<<" degrees Celsius "<<std::endl;
 
     return 0;
 }
