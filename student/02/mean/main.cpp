@@ -14,7 +14,7 @@ int main()
     else{
         float mean =0;
         for(int i=1;i<=n;i++){
-        std::cout<<"Input "<<i<<". number:";
+        std::cout<<"Input "<<i<<". number: ";
         std::cin>>value;
         mean+=value;
         }
