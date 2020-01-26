@@ -10,6 +10,6 @@ int main(){
         cout<<"Error! The cube of "<<n<<" is not "<<area<<endl;
     }
     else{
-        cout<<"The cube of "<<n<<" is "<<area<<endl;
+        cout<<"The cube of "<<n<<" is "<<area<<"."<<endl;
     }
 }
