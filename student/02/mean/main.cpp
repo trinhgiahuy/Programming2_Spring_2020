@@ -18,9 +18,9 @@ int main()
         std::cin>>value;
         mean+=value;
         }
-    cout.setf(ios::fixed);
-    cout.setf(ios::showpoint);
-    cout.precision(1);
+    //cout.setf(ios::fixed);
+    //cout.setf(ios::showpoint);
+    //cout.precision(1);
     std::cout<<"Mean value of the given numbers is "<<mean/n<<std::endl;
     }
 }
