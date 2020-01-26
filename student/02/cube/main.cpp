@@ -1,5 +1,5 @@
-#include<iostream>
-#include<cmath>
+#include<iostream>;
+#include<cmath>;
 using namespace std;
 int main(){
     int n,area;
@@ -10,6 +10,6 @@ int main(){
         cout<<"Error! The cube of "<<n<<" is not "<<area<<endl;
     }
     else{
-        cout<<"The cube of "<<n<<" is "<<area<<"."<<endl;
+        cout<<"The cube of "<<n<<" is "<<area<<endl;
     }
 }
