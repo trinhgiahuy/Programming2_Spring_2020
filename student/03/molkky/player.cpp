@@ -1,22 +1,36 @@
-#ifndef PLAYER_HH
-#define PLAYER_HH
-
-# include <string>
+#include <iostream>
+#include <string>
+#include "player.hh"
 
 using namespace std;
 
-class Player
+Player::Player(string name):
+    name_(name), points_(0){
+}
+
+string Player::get_name() const
 {
-public:
-    Player(string name);
-    string get_name() const;
-    int get_points() const;
-    bool has_won() const;
-    void add_points(int added_points);
+    return name_;
+}
 
-private:
-    string name_;
-    int points_;
-};
+int Player::get_points() const
+{
+    return points_;
+}
 
-#endif // PLAYER_HH
+bool Player::has_won() const
+{
+    return (points_ == 50);
+}
+
+void Player::add_points(int points)
+{
+    if (points_ + points > 50)
+    {
+        cout << get_name() << " gets penalty points!\n";
+        points_ = 25;
+    }
+    else
+        points_ += points;
+}
+
