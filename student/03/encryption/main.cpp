@@ -1,7 +1,7 @@
 #include<iostream>
 #include<string>
 #include<cctype>
-using namespace std;
+/*using namespace std;
 int main(){
     string input,encrypt_string;
     string model="abcdefghijklmnopqrstuvwzyx";
@@ -12,8 +12,8 @@ int main(){
         cout<<"Error! The encryption key must contain 26 characters.";
     }
     else
-    {   for(int i=0;i<=input.length()-1;i++){
-            if(islower(input[i]){
+    {   for(unsigned int i=0;i<input.length()+1;i++){
+            if(isupper(input[i])){
                 cout<<"Error! The encryption key must contain only lower case characters.";
             }
             else{
@@ -26,19 +26,70 @@ int main(){
                 }
                 else{
                     cout<<"Enter the text to be encrypted: ";
-                    //getline(cin,input1);
-                    cin>>encrypt_string;
-                    for(int j=0;j<26;j++){
-                        int new_index;
-                        std::size_t index=input.find(encrypt_string[j]);
-                        encrypt_string.replace(j,1,model2[26+j]);
+                    getline(cin,encrypt_string);
+                    //cin>>encrypt_string;
+                    for(unsigned int j=0;j<encrypt_string.length()+1;j++){
+                        //int new_index;
+                        std::size_t new_index = model.find(encrypt_string[j]);
+                        //std::cout << encrypt_string << " " << encrypt_string[j] << " " << model2[26 + new_index] << "\n";
+                        std::cout << model2[26 + new_index];
+                        encrypt_string.replace(encrypt_string[j], 1, 1,model2[26+new_index]);
                     }
                 }
             }
-        cout<<"Encrypted text: "<<encrypt_string;
         }
+    cout<<"Encrypted text: "<<encrypt_string<<"\n";
     }
 
 
 
-}
+}*/
+using namespace std;
+
+
+
+
+int main()
+{
+    string encrypted = "abcdefghijklmnopqrstuvwxyz";
+    string encrypt = "";
+    string::size_type len = 0;
+    cout << "Enter the encryption key: ";
+    cin >> encrypt;
+    len = encrypt.length();
+    if (len == 26) {
+        for (int i = 0; i < 26; i ++) {
+            char letter;
+            char letter2;
+            letter = encrypt.at(i);
+            letter2 = encrypted.at(i);
+            string::size_type location = 0;
+            location = encrypt.find(letter2);
+            if ( isdigit(letter) )  {
+                cout << "Error! The encryption key must contain only lower case characters.";
+                exit(EXIT_FAILURE);
+            } else if ( isupper(letter) ){
+                cout << "Error! The encryption key must contain only lower case characters.";
+                exit(EXIT_FAILURE);
+            }
+            if ( location == string::npos ) {
+                cout << "Error! The encryption key must contain all alphabets a-z.";
+                exit(EXIT_FAILURE);
+            }
+        }
+    string text = "";
+    cout << "Enter the text to be encrypted: ";
+    cin >> text;
+    for (unsigned int j = 0; j < text.length(); j++) {
+        string::size_type location = 0;
+        location = encrypted.find(text.at(j));
+        text.at(j) = encrypt.at(location);
+    }
+    cout << "Encrypted text: " << text << endl;
+    } else {
+        cout << "Error! The encryption key must contain 26 characters.";
+        exit(EXIT_FAILURE);
+    }
+   }
+
+
