@@ -32,16 +32,15 @@ bool same_values(std::vector<int>& ints){
 bool is_ordered_non_strict_ascending(std::vector<int>& ints){
     //unsigned int min_ele;
     for(unsigned int i=0;i<ints.size()-1;i++){
-        //int min_ele=ints[0]
-        if(ints[i+1]>ints[i]){
-             //min_ele=ints[i];
-             continue;
-        }else{
-            return false;
+            //int min_ele=ints[0]
+            if(ints[i+1]>=ints[i]){
+                 //min_ele=ints[i];
+                 continue;
+            }else{
+                return false;
+            }
         }
-    }
-    return true;
-
+        return true;
 }
 
 bool  is_arithmetic_series(std::vector<int>& ints){
@@ -60,19 +59,30 @@ bool  is_arithmetic_series(std::vector<int>& ints){
 }
 
 bool is_geometric_series(std::vector<int>& ints){
-    for(unsigned int i=0;i<ints.size()-2;i++)
-    {
-        int a,b;
-        a=ints[i+1]/ints[i];
-        b=ints[i+2]/ints[i+1];
-        if(a!=b){
+    if(same_values(ints)){
+        if(ints[0]==0){
             return false;
         }
         else{
-            continue;
+            return true;
         }
     }
-    return true;
+    else{
+        for(unsigned int i=0;i<ints.size()-2;i++)
+        {
+            int a,b;
+            a=ints[i+1]/ints[i];
+            b=ints[i+2]/ints[i+1];
+            if(a!=b){
+                return false;
+            }
+            else{
+                continue;
+            }
+        }
+
+        return true;
+    }
 }
 
 int main()
