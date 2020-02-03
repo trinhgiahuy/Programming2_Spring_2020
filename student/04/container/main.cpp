@@ -30,12 +30,12 @@ bool same_values(std::vector<int>& ints){
 }
 
 bool is_ordered_non_strict_ascending(std::vector<int>& ints){
-    int min_ele;
-    for(unsigned int i=0;i<ints.size();i++){
+    //unsigned int min_ele;
+    for(unsigned int i=0;i<ints.size()-1;i++){
         //int min_ele=ints[0]
         if(ints[i+1]>ints[i]){
-             min_ele=ints[i];
-             break;
+             //min_ele=ints[i];
+             continue;
         }else{
             return false;
         }
@@ -45,13 +45,17 @@ bool is_ordered_non_strict_ascending(std::vector<int>& ints){
 }
 
 bool  is_arithmetic_series(std::vector<int>& ints){
-    for(unsigned int i=0;i<ints.size()-2;i++)
-        if(ints[i+1]-ints[i!=ints[i+2]-ints[i+1]]){
+    for(unsigned int i=0;i<ints.size()-2;i++){
+        int a,b;
+        a=ints[i+1]-ints[i];
+        b=ints[i+2]-ints[i+1];
+        if(a!=b){
             return false;
         }
         else{
             continue;
         }
+    }
     return true;
 }
 
