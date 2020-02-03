@@ -15,9 +15,9 @@ void read_integers(std::vector< int >& ints, int count)
 
 bool same_values(std::vector<int>& ints){
 
-    for(int i=0;i<ints.size()-1;i++){
+    for(unsigned int i=0;i<ints.size()-1;i++){
         int model=ints[i];
-        for(int j=1;j<ints.size();j++){
+        for(unsigned int j=1;j<ints.size();j++){
             if(model!=ints[j]){
                 return false;
             }
@@ -31,7 +31,7 @@ bool same_values(std::vector<int>& ints){
 
 bool is_ordered_non_strict_ascending(std::vector<int>& ints){
     int min_ele;
-    for(int i=0;i<ints.size();i++){
+    for(unsigned int i=0;i<ints.size();i++){
         //int min_ele=ints[0]
         if(ints[i+1]>ints[i]){
              min_ele=ints[i];
@@ -45,7 +45,7 @@ bool is_ordered_non_strict_ascending(std::vector<int>& ints){
 }
 
 bool  is_arithmetic_series(std::vector<int>& ints){
-    for(int i=0;i<ints.size()-2;i++)
+    for(unsigned int i=0;i<ints.size()-2;i++)
         if(ints[i+1]-ints[i!=ints[i+2]-ints[i+1]]){
             return false;
         }
@@ -56,7 +56,7 @@ bool  is_arithmetic_series(std::vector<int>& ints){
 }
 
 bool is_geometric_series(std::vector<int>& ints){
-    for(int i=0;i<ints.size()-2;i++)
+    for(unsigned int i=0;i<ints.size()-2;i++)
     {
         int a,b;
         a=ints[i+1]/ints[i];
