@@ -16,6 +16,7 @@
 #include <iostream>
 #include <iomanip>
 #include<random>
+#include<algorithm>
 
 //const int EMPTY = 16;
 const unsigned int PRINT_WIDTH = 5;
@@ -55,7 +56,7 @@ void Board::my_shuffle(std::vector<unsigned int> &numbers, int seed){
 }
 /*----------------------------------------------------------------*/
 bool Board::solvability(){
-   std::vector<std::vector<unsigned int >> grid_cpt(Board.grid_);
+   std::vector<std::vector<unsigned int >> grid_cpt(grid_);
    std::vector<std::vector<unsigned int >> grid_tem;
    int row=get_coordinate(16).first;
    int column=get_coordinate(16).second;
@@ -77,6 +78,7 @@ for(unsigned int u=0;u<SIZE;){
       u++;
    }
 }
+
 /*------------------------------------------------------------*/
 //constructor1
 Board::Board(int seed){
@@ -85,6 +87,7 @@ Board::Board(int seed){
     for (int i=0;i<EMPTY;i++){
         model_grid[i]=i+1;
     }
+
     my_shuffle(model_grid,seed);
 }
 /*------------------------------------------------------------*/
@@ -92,40 +95,65 @@ Board::Board(int seed){
 std::pair<unsigned int, unsigned int>Board::get_coordinate(unsigned int index_coordinate){
     std::pair<unsigned int, unsigned int> lattest(0,0);
     for(unsigned int u=0;u<SIZE;){
+
         for(unsigned int v=0;v<<SIZE;){
-            if(this->grid_[u][v]==index_coordinate){
+
+            if(grid_[u][v]==index_coordinate){
                lattest.first=u;
                lattest.second=v;
             }else{
                 continue;
             }
         v++;
+
         }
         u++;
+
     }
     return lattest;
 }
 /*--------------------------------------------------------------*/
-void Board::control(std::string direct,std::pair<unsigned int, unsigned int> coordinate){
+void Board::micro_controller(std::string direct,std::pair<unsigned int, unsigned int> coordinate){
     int row=coordinate.first;
     int column=coordinate.second;
+    //std::string a=std::cout<<"Impossible direction: "<<direct<<std::endl;
+
     if(direct=="w"){
-        if(row==0||Board.grid_[row][column-1]!=16){
-            std::cout<<"Impossible direction: "<<direct<<std::endl;
+        if(row==0||grid_[row][column-1]!=16){
+            std::cout<<"Impossible direction: "<<direct<<std::endl;}
         else{
-        std::swap(Board.grid_[row][column],Board.grid_[row-1][column]);}
+            std::swap(grid_[row][column],grid_[row-1][column]);}
         }
-    }
-    if(direct="s"){
-        move_down();
-    }
-    if(direct=="a"){
-        move_left();
-    }
-    if(direct=="d"){
-        move_right();
+
+
+    if(direct=="s"){
+        if(row==SIZE-1||grid_[row][column]!=16){
+            std::cout<<"Impossible direction: "<<direct<<std::endl;
+        }else{
+            std::swap(grid_[row][column],grid_[row + 1][column]);
+
     }
 }
+
+
+    if(direct=="a"){
+        if(column==0||grid_[row][column - 1] != 16 ){
+            std::cout<<"Impossible direction: "<<direct<<std::endl;
+        }else{
+            std::swap(grid_[row][column],grid_[row][column-1]);
+        }
+    }
+
+
+    if(direct=="d"){
+        if(column==SIZE-1||grid_[row][column+1] != 16 ){
+            std::cout<<"Impossible direction: "<<direct<<std::endl;
+        }else{
+            std::swap(grid_[row][column],grid_[row][column+1]);
+        }
+    }
+}
+
 /*______________________________________________________________*/
 //void Board::move_up(){
 //    if(row==0||Board.grid_[row][column-1]!=16){
@@ -133,16 +161,17 @@ void Board::control(std::string direct,std::pair<unsigned int, unsigned int> coo
 //        else{
 //    std::swap(Board.grid_[row][column],Board.grid_[row-1][column]);}
 //    }
-void Board::move_down(){
-     std::swap(Board.grid_[row][column], Board.grid[row + 1][column] );
-}
-void Board::move_left(){
-      std::swap( Board.grid[row][column], Board.grid[row][column];}
-void Board::move_right(){
-     std::swap( Board.grid[row][column],Board.grid[row][column +1]);
-}
+//void Board::move_down(){
+//     std::swap(grid_[row][column], Board.grid[row + 1][column] );
+//}
+//void Board::move_left(){
+//      std::swap( Board.grid[row][column], Board.grid[row][column];}
+//void Board::move_right(){
+//     std::swap( Board.grid[row][column],Board.grid[row][column +1]);
+//}
 /*_____________________________________________________________*/
-bool Board::winning_(){
+
+bool Board::winning(){
     for (unsigned int u=0;u<SIZE;u++){
         for(unsigned int v=0;v<SIZE;){
             if(Board.grid_[u][v]==u*SIZE+v+1){

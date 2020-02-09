@@ -37,9 +37,9 @@ public:
     // More methods
     std::pair<unsigned int,unsigned int>get_coordinate(unsigned int index_coordinate);
 
-    void control(std::string direct,std::pair<unsigned int, unsigned int> coordinate);
+    void micro_controller(std::string direct,std::pair<unsigned int, unsigned int> coordinate);
     void solvability();
-    void win();
+    void winning();
 
     std::vector<std::vector<unsigned int>> grid_;
 private:
