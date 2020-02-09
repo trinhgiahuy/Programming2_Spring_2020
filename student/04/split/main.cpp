@@ -25,5 +25,6 @@ int main()
     std::cout << "Splitted string ignoring empty parts: " << std::endl;
     for( auto part : parts_no_empty ) {
         std::cout << part << std::endl;
+
     }
 }
