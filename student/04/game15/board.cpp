@@ -48,9 +48,36 @@ void Board::my_shuffle(std::vector<unsigned int> &numbers, int seed)
     for(unsigned int i = 0; i < numbers.size(); ++i)
     {
         unsigned int random_index = distr(randomEng);
-        unsigned int temp = numbers.at(i);
-        numbers.at(i) = numbers.at(random_index);
-        numbers.at(random_index) = temp;
+        unsigned int temp = numbers[i];
+        numbers[i] = numbers[random_index];
+        numbers[random_index] = temp;
     }
 }
+//constructor1
+Board::Board(int seed){
+    std::vector<unsigned int> model_grid(16,0);
+
+    for (int i=0;i<EMPTY;i++){
+        model_grid[i]=i+1;
+    }
+    my_shuffle(model_grid,seed);
+}
+
+std::pair<unsigned int, unsigned int>Board::get_coordinate(unsigned int index_coordinate){
+    std::pair<unsigned int, unsigned int> lattest(0,0);
+    for(unsigned int u=0;u<SIZE;u++){
+        for(unsigned int v=0;v<<SIZE;v++){
+            if(this->grid_[u][v]==index_coordinate){
+               lattest.first=u;
+               lattest.second=v;
+            }
+        }
+    }
+    return lattest;
+}
+
+
+
+
+
 
