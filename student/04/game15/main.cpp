@@ -18,9 +18,9 @@
  * Notes about the program and it's implementation:
  *
  * */
-
+#include<iostream>
 #include "board.hh"
-bool check_input(char input){
+bool check_input(std::string input){
     if(input!="y"|| input!="n"||input!="q"){
         //cout<<"Unknown choice: "<<input;
         return false;
@@ -28,43 +28,29 @@ bool check_input(char input){
         return true;
     }
 }
-bool solvability(){
-   std::vector<std::vector<unsigned int >> grid_cpt(this->grid_);
-   std::vector<std::vector<unsigned int >> grid_tem;
-   int row=get_coordinate(16).first;
-   int column=get_coordinate(16).second;
-   int count;
-   while(row!=SIZE-1){
-        std::swap(grid_cpt[row][column],grid_cpt[row+1][column]);
-        ++row;
-   }
-
-for(unsigned int u=0;u<SIZE;u++){
-    for(unsigned int v=0;v<SIZE<;v++){
-        if(grid_cpt[u][v]!=16){
-               grid_tem.push_back(grid_cpt[u][v]);
-           }
-       }
-   }
-}
 
 int main()
 {
-    char input;
-    cout<<"Random initialization (y/n)"<<endl;
-    cin>>input;
+    std::string input;
+    std::cout<<"Random initialization (y/n)"<<std::endl;
+    getline(std::cin,input);
     while (!check_input(input)) {
-        cout<<"Unknown choice: "<<input;
-        cout<<"Random initialization (y/n)"<<endl;
+        std::cout<<"Unknown choice: "<<input;
+        std::cout<<"Random initialization (y/n)"<<std::endl;
+        if(input=="q"){
+            return EXIT_SUCCESS;
+        }else{
+            continue;
+        }
+
     }
     if(input=="y"){
         int seed;
-        cout<<"Enter a seed value (or an empty line): "<<endl;
-        cin>>seed;
-        solvability();
+        std::cout<<"Enter a seed value (or an empty line): "<<std::endl;
+        std::cin>>seed;
+        //solvability();
         std::vector<std::vector<unsigned int>>A[SIZE][SIZE];
-        Board A;
-        A.my_shuffle();
+
 
 
     }else{

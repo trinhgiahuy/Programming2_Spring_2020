@@ -19,7 +19,7 @@
 #include<string>
 
 const int SIZE = 4;
-
+const int EMPTY = 16;
 class Board
 {
 public:
@@ -40,14 +40,44 @@ public:
     void control(std::string direct,std::pair<unsigned int, unsigned int> coordinate);
     void solvability();
     void win();
+
+    std::vector<std::vector<unsigned int>> grid_;
 private:
     // Shuffles the numbers vector by using seed as a seed value
     void my_shuffle(std::vector<unsigned int>& numbers, int seed);
 
     // Game grid for the 15 puzzle
-    std::vector<std::vector<unsigned int>> grid_;
+
 
     // More attributes/methods
+    void move_up();
+    void move_down();
+    void move_left();
+    void move_right();
 };
+/*------------------------------------------------------------*/
+//Function that check if the game is solvable or not
+
+//void Board::move_up(std::string direct,std::pair<unsigned int, unsigned int> coordinate){
+//    int row=coordinate.first;
+//    int column=coordinate.second;
+//}
+
+//    int trim;
+//    case stoi(w):
+//    move_up();
+//        break;
+//    case s:
+//    move_down();
+//        break;
+//    case d:
+//    move_right();
+//        break;
+//    case s:
+//    move_left();
+//        break;
+//    default:
+//        cout<<"unknow command"<<direct<<endl;
+//        break;
 
 #endif // BOARD_HH
