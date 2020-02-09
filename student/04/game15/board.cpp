@@ -57,17 +57,17 @@ void Board::my_shuffle(std::vector<unsigned int> &numbers, int seed){
 /*----------------------------------------------------------------*/
 bool Board::solvability(){
    std::vector<std::vector<unsigned int >> grid_cpt(grid_);
-   std::vector<std::vector<unsigned int >> grid_tem;
+   std::vector<unsigned int> grid_tem;
    int row=get_coordinate(16).first;
    int column=get_coordinate(16).second;
-   int count;
+   int count=0;
    while(row!=SIZE-1){
         std::swap(grid_cpt[row][column],grid_cpt[row+1][column]);
         ++row;
    }
 
 for(unsigned int u=0;u<SIZE;){
-    for(unsigned int v=0;v<SIZE<;){
+    for(unsigned int v=0;v<SIZE;){
         if(grid_cpt[u][v]!=16){
                grid_tem.push_back(grid_cpt[u][v]);
         }else{
@@ -76,7 +76,23 @@ for(unsigned int u=0;u<SIZE;){
         v++;
        }
       u++;
-   }
+}
+
+for( unsigned int u=0;u<grid_tem.size()- 1;){
+
+    for ( unsigned int v = u+1; v< grid_tem.size();){
+
+        if ( grid_tem[v] < grid_tem[u] ){
+                count++;
+            }
+
+        v++;
+        }
+
+    u++;
+
+}
+return (count % 2 == 0);
 }
 
 /*------------------------------------------------------------*/
@@ -174,7 +190,7 @@ void Board::micro_controller(std::string direct,std::pair<unsigned int, unsigned
 bool Board::winning(){
     for (unsigned int u=0;u<SIZE;u++){
         for(unsigned int v=0;v<SIZE;){
-            if(Board.grid_[u][v]==u*SIZE+v+1){
+            if(grid_[u][v]==u*SIZE+v+1){
                 return true;
             }
             v++;

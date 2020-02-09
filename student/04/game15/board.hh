@@ -38,8 +38,8 @@ public:
     std::pair<unsigned int,unsigned int>get_coordinate(unsigned int index_coordinate);
 
     void micro_controller(std::string direct,std::pair<unsigned int, unsigned int> coordinate);
-    void solvability();
-    void winning();
+    bool solvability();
+    bool winning();
 
     std::vector<std::vector<unsigned int>> grid_;
 private:
