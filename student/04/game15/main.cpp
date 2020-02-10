@@ -25,6 +25,7 @@
 #include<ctime>
 #include<sstream>
 /*----------------------------------------------------*/
+// a function that check player's input and return a input_model(string)
 std::string check_input(){
     std::string input_model = "";
 
@@ -42,11 +43,13 @@ std::string check_input(){
 }
 
 /*----------------------------------------------------*/
-bool control(Board& board){
-    std::string input="";
-    std::string digit="";
+// a function that control the game's flow and return the boolean value
+bool game_control(Board& board){
+
     while( true ){
            std::cout << "Dir (command, number): ";
+           std::string input="";
+           std::string digit="";
            std::cin >> input;
            if ( input == "q" ){
                return 0;
@@ -74,27 +77,31 @@ bool control(Board& board){
            board.print();
        }
 }
+
 /*--------------------------------------------*/
+// a function that check player's input whether is any numbers from 1- 16 is missing
 bool find_missing_num(std::vector<unsigned int>data){
     std::sort(data.begin(),data.end());
     for(unsigned int index=0;index<EMPTY;){
         if(data[index]-index!=1){
-            std::cout<<"Number "<<index+1<<"is missing"<<std::endl;
+            std::cout<<"Number "<<index+1<<" is missing"<<std::endl;
             return false;
         }
         ++index;
     }
     return true;
 }
-/*----------------------------------------------------*/
-bool mode(){
 
-    std::vector<unsigned int> data(16,0);
+/*----------------------------------------------------*/
+// a function that continue the game's flow if player's command is no
+bool game_determine_mode(){
     std::cout<<"Enter the numbers 1-16 in a desired order (16 means empty):"<<std::endl;
+    std::vector<unsigned int> data(16,0);
+
     for(int index=0;index<EMPTY;++index){
         std::cin>>data[index];
     }
-    if(find_missing_num(data)!=0){
+    if(find_missing_num(data)!= true){
         return false;
     }
     Board board(data);
@@ -105,7 +112,7 @@ bool mode(){
         return true;
     }
     board.print();
-    control(board);
+    game_control(board);
     return true;
 }
 
@@ -113,6 +120,7 @@ bool mode(){
 /*----------------------------------------------------*/
 
 /*_____________________________________________________*/
+// a function that randomize the puzzle
 void game_random(){
     std::cout << "Give a seed value or an empty line: ";
     std::string seed = "";
@@ -131,16 +139,17 @@ void game_random(){
 
     board.print();
 
-    control( board );
+    game_control( board );
 }
 
+/*----------------------------------------------------------*/
 int main(){
     std::string input_mode="";
     input_mode=check_input();
     if(input_mode=="y"){
         game_random();
     }else{
-        if(mode()!=0){
+        if(!game_determine_mode()){
             return EXIT_FAILURE;}
     }
     return EXIT_SUCCESS;

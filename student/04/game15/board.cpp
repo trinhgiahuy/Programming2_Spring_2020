@@ -21,6 +21,8 @@
 //const int EMPTY = 16;
 const unsigned int PRINT_WIDTH = 5;
 
+/*----------------------------------------*/
+//print out the puzzle
 void Board::print() const
 {
     for(unsigned int x = 0; x < SIZE; ++x)
@@ -29,9 +31,9 @@ void Board::print() const
         for(unsigned int y = 0; y < SIZE; ++y)
         {
             std::cout << "|" << std::setw(PRINT_WIDTH - 1);
-            if(this->grid_.at(x).at(y) != EMPTY)
+            if(grid_.at(x).at(y) != EMPTY)
             {
-                std::cout << this->grid_.at(x).at(y);
+                std::cout << grid_.at(x).at(y);
             }
             else
             {
@@ -55,8 +57,9 @@ void Board::my_shuffle(std::vector<unsigned int> &numbers, int seed){
     }
 }
 /*----------------------------------------------------------------*/
+//a function that check whether the game is solvable or not
 bool Board::solvability(){
-   std::vector<std::vector<unsigned int >> grid_cpt(this->grid_);
+   std::vector<std::vector<unsigned int >> grid_cpt(grid_);
    std::vector<unsigned int>grid_tem;
    int row=get_coordinate(16).first;
    int column=get_coordinate(16).second;
@@ -93,12 +96,15 @@ for( unsigned int u=0;u<grid_tem.size()- 1;){
 }
 return (count % 2 == 0);
 }
+
 /*------------------------------------------------------------*/
+//constructor 1 for classs Board
 Board::Board(std::vector<unsigned int>&data){
-    fix_data(data); 
+    fix_data(data);
 }
+
 /*------------------------------------------------------------*/
-//constructor1
+//constructor2 for class Board
 Board::Board(int seed){
     std::vector<unsigned int> model_grid(16,0);
 
@@ -111,15 +117,16 @@ Board::Board(int seed){
 
     fix_data(model_grid);
 }
+
 /*------------------------------------------------------------*/
 //function that return the 2 dimensions vector that contains the u-v coordinate
 std::pair<unsigned int, unsigned int>Board::get_coordinate(unsigned int index_coordinate){
     std::pair<int, int> lattest(0,0);
     for(unsigned int u=0;u<SIZE;++u){
 
-        for(unsigned int v=0;v<<SIZE;++v){
+        for(unsigned int v=0;v<SIZE;++v){
 
-            if(this->grid_[u][v]==index_coordinate){
+            if(grid_[u][v]==index_coordinate){
                lattest.first=u;
                lattest.second=v;
                return lattest;
@@ -128,69 +135,72 @@ std::pair<unsigned int, unsigned int>Board::get_coordinate(unsigned int index_co
     }
     return lattest;
 }
+
 /*--------------------------------------------------------------*/
+//a function that use to move the grid
 void Board::micro_controller(std::string direct,std::pair<unsigned int, unsigned int> coordinate){
     int row=coordinate.first;
     int column=coordinate.second;
     //std::string a=std::cout<<"Impossible direction: "<<direct<<std::endl;
 
     if(direct=="w"){
-        if(row==0||this->grid_[row-1][column]!=16){
+        if(row==0||grid_[row-1][column]!=16){
             std::cout<<"Impossible direction: "<<direct<<std::endl;}
         else{
-            std::swap(this->grid_[row][column],this->grid_[row-1][column]);}
+            std::swap(grid_[row][column],grid_[row-1][column]);}
         }
 
 
     if(direct=="s"){
-        if(row==SIZE-1||this->grid_[row+1][column]!=16){
+        if(row==SIZE-1||grid_[row+1][column]!=16){
             std::cout<<"Impossible direction: "<<direct<<std::endl;
         }else{
-            std::swap(this->grid_[row][column],this->grid_[row + 1][column]);
+            std::swap(grid_[row][column],grid_[row + 1][column]);
 
     }
 }
 
 
     if(direct=="a"){
-        if(column==0||this->grid_[row][column - 1] != 16 ){
+        if(column==0||grid_[row][column - 1] != 16 ){
             std::cout<<"Impossible direction: "<<direct<<std::endl;
         }else{
-            std::swap(this->grid_[row][column],this->grid_[row][column-1]);
+            std::swap(grid_[row][column],grid_[row][column-1]);
         }
     }
 
 
     if(direct=="d"){
-        if(column==SIZE-1||this->grid_[row][column+1] != 16 ){
+        if(column==SIZE-1||grid_[row][column+1] != 16 ){
             std::cout<<"Impossible direction: "<<direct<<std::endl;
         }else{
-            std::swap(this->grid_[row][column],this->grid_[row][column+1]);
+            std::swap(grid_[row][column],grid_[row][column+1]);
         }
     }
 }
 
 /*______________________________________________________________*/
 //void Board::move_up(){
-//    if(row==0||Board.this->grid_[row][column-1]!=16){
+//    if(row==0||Board.grid_[row][column-1]!=16){
 //        std::cout<<"Impossible direction: "<<direct<<std::endl;
 //        else{
-//    std::swap(Board.this->grid_[row][column],Board.this->grid_[row-1][column]);}
+//    std::swap(Board.grid_[row][column],Board.grid_[row-1][column]);}
 //    }
 //void Board::move_down(){
-//     std::swap(this->grid_[row][column], Board.grid[row + 1][column] );
+//     std::swap(grid_[row][column], Board.grid[row + 1][column] );
 //}
 //void Board::move_left(){
 //      std::swap( Board.grid[row][column], Board.grid[row][column];}
 //void Board::move_right(){
 //     std::swap( Board.grid[row][column],Board.grid[row][column +1]);
 //}
-/*_____________________________________________________________*/
 
+/*_____________________________________________________________*/
+//a fucnction that check whether the player is win or not
 bool Board::winning(){
     for (unsigned int u=0;u<SIZE;++u){
         for(unsigned int v=0;v<SIZE;++v){
-            if(this->grid_[u][v]!=u*SIZE+v+1){
+            if(grid_[u][v]!=u*SIZE+v+1){
                 return false;
             }
          //   v++;
@@ -201,13 +211,14 @@ bool Board::winning(){
 }
 /*-------------------------------------------------------------*/
 void Board::fix_data(const std::vector<unsigned int>& data){
-    std::vector<unsigned int> row_data;
+
     for(unsigned int u=0;u<SIZE;++u){
+        std::vector<unsigned int> row_data;
         for (unsigned int v=0;v<SIZE;++v){
             row_data.push_back(data[u*SIZE+v]);
             //v++;
         }
-        this->grid_.push_back(row_data);
+        grid_.push_back(row_data);
         //u++;
     }
 }
