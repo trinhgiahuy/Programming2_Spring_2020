@@ -44,7 +44,7 @@ std::string check_input(){
 
 /*----------------------------------------------------*/
 // a function that control the game's flow and return the boolean value
-bool game_control(Board& board){
+void game_control(Board& board){
 
     while( true ){
            std::cout << "Dir (command, number): ";
@@ -52,7 +52,7 @@ bool game_control(Board& board){
            std::string digit="";
            std::cin >> input;
            if ( input == "q" ){
-               return 0;
+               return;
            }
            std::cin >> digit;
            if ( input != "a" && input != "s" && input != "d" && \
