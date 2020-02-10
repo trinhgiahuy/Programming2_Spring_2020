@@ -27,12 +27,12 @@ public:
     // 1. Implement a constructor that fills the game grid with empties or such
     // and two initialize methods
     // 2. Implement two constructors, one for each initialization way
-    Board(std::vector<unsigned int>& content);
+    Board(std::vector<unsigned int>& data);
     Board (int seed);
 
 
     // Prints the game grid
-    void print();
+    void print() const;
 
     // More methods
     std::pair<unsigned int,unsigned int>get_coordinate(unsigned int index_coordinate);
@@ -40,20 +40,22 @@ public:
     void micro_controller(std::string direct,std::pair<unsigned int, unsigned int> coordinate);
     bool solvability();
     bool winning();
+    void move_up();
+    void move_down();
+    void move_left();
+    void move_right();
 
-    std::vector<std::vector<unsigned int>> grid_;
+
 private:
     // Shuffles the numbers vector by using seed as a seed value
     void my_shuffle(std::vector<unsigned int>& numbers, int seed);
 
     // Game grid for the 15 puzzle
 
-
+    std::vector<std::vector<unsigned int>> grid_;
     // More attributes/methods
-    void move_up();
-    void move_down();
-    void move_left();
-    void move_right();
+
+    void fix_data(const std::vector<unsigned int>& data);
 };
 /*------------------------------------------------------------*/
 //Function that check if the game is solvable or not
