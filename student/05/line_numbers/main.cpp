@@ -7,11 +7,11 @@ int main(){
     std::string file_name_1 ="";
     cout<<"Input file: ";
     getline(cin,file_name);
-    cout<<"Output file: "<<std::endl;
+    cout<<"Output file: ";
     ifstream file_object(file_name);
     getline(cin,file_name_1);
     if(not file_object){
-        cout<<"Error! The file "<<file_name<<"cannot be opened."<<std::endl;
+        cout<<"Error! The file "<<file_name<<"cannot be opened."<<endl;
 
     }else{
         std::string line;
