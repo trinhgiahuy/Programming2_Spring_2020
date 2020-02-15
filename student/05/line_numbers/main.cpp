@@ -1,26 +1,33 @@
 #include <iostream>
-#include <fstream>
-#include<string>
-using namespace std;
-int main(){
-    std::string file_name ="";
-    std::string file_name_1 ="";
-    cout<<"Input file: ";
-    getline(cin,file_name);
-    cout<<"Output file: ";
-    ifstream file_object(file_name);
-    getline(cin,file_name_1);
-    if(not file_object){
-        cout<<"Error! The file "<<file_name<<"cannot be opened."<<endl;
+#include <fstream>  // Notice the required library for file handling
+#include <string>
 
-    }else{
-        std::string line;
-        int num=1;
-        while (getline(file_object,line)) {
-            cout<<num<<" "<<line<<endl;
-            num+=1;
+using namespace std;
+
+
+int main() {
+    string filename = "";
+    string filename2 = "";
+    cout << "Input file: ";
+    getline(cin, filename);
+    ifstream file_object(filename);
+    cout << "Output file: ";
+    getline(cin, filename2);
+
+    if ( not file_object ) {
+        cout << "Error! The file " << filename << " cannot be opened."<< endl;
+        return EXIT_FAILURE;
+    } else {
+
+        ofstream file_object2(filename2);
+        string line;
+        int count = 0;
+        while ( getline(file_object, line) ) {
+            count ++;
+            file_object2 << count << " " << line << endl;
         }
         file_object.close();
-    }
+        file_object2.close();
 
+    }
 }
