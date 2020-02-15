@@ -25,7 +25,5 @@ int main()
             }
              std::cout << word << std::endl;
         }
-
-
     }
 }
