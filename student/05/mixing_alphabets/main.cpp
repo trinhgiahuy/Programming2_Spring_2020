@@ -18,12 +18,13 @@ int main()
         if (word == "END")
         {
             return EXIT_SUCCESS;
-        }else{
+        }else if (word.size()>2){
             //vector<string>::iterator iter;
-            //for (auto& iter:word){
-                shuffle(word.begin()+1,word.end()-1,generator);
+            //for (auto iter:word)
+            shuffle(word.begin()+1,word.end()-1,generator);
             //}
-             std::cout << word << std::endl;
+
         }
+          std::cout << word << std::endl;
     }
 }
