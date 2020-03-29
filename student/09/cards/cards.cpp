@@ -92,11 +92,12 @@ void Cards::print_from_bottom_to_top(std::ostream &s){
 
 bool Cards::remove(int &id){
     id=top_->data;
-    if(top_==bot_){
+    if(top_->data==bot_->data){
+        top_=nullptr;
+        bot_=nullptr;
         return false;
     }else{
         top_=top_->next;
-        //delete *top_;
         return true;
     }
 }
