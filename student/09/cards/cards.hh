@@ -50,30 +50,8 @@ class Cards {
       // You can use the function below in the implementation of
       // the method print_from_bottom_to_top.
       int recursive_print(Card_data* top_, std::ostream& s);
-      std::vector<Card_data>Card_data_vector;
       Card_data* last_;
 };
 
-//Cards::add(int id){
-//    Card_data id;
-//    id.nex=id;
-
-
-//}
-//Cards::print_from_top_to_bottom(std::ostream &s){
-//    Card_data* iter;
-//    for(iter=Card_data_vector.begin();iter!=Card_data_vector.end();iter++){
-//        s<<*iter->data<<std::endl;
-//    }
-//}
-//Cards::print_from_bottom_to_top(std::ostream &s){
-//    Card_data* iter;
-//    for(iter=Card_data_vector.end();iter!=Card_data_vector.begin();iter--){
-//        s<<*iter->data<<std::endl;
-//    }
-//}
-//Cards::bottom_to_top(){
-
-//}
 
 #endif // CARDS_HH

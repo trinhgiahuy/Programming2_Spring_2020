@@ -2,12 +2,8 @@
 
 // TODO: Implement the methods here
 Cards::Cards():top_(nullptr),bot_(nullptr){}
-Cards::~Cards(){
-    while(top_!=nullptr){
-        Card_data*new_release = top_;
-        delete new_release;
-    }
-}
+
+
 void Cards::add(int id)
 {
     Card_data* new_card=new Card_data{id,nullptr};
@@ -35,7 +31,7 @@ void Cards::print_from_top_to_bottom(std::ostream &s){
 bool Cards::bottom_to_top(){
     if(top_==nullptr){
         return false;
-    }else{
+    }
     Card_data* count;
     count=top_;
     Card_data* new_card= new Card_data;
@@ -52,21 +48,21 @@ bool Cards::bottom_to_top(){
             count=count->next;
         }
     }
-        return true;
-    }
+
+    return true;
 }
 
 bool Cards::top_to_bottom(){
     if(top_==nullptr){
         return false;
-    }else{
+    }
     Card_data* new_card=new Card_data;
     new_card->data=top_->data;
     bot_->next=new_card;
-    new_card->next=nullptr;
+    bot_=new_card;
     top_=top_->next;
     return true;
-    }
+
 }
 
 void Cards::print_from_bottom_to_top(std::ostream &s){
@@ -102,5 +98,11 @@ bool Cards::remove(int &id){
         top_=top_->next;
         //delete *top_;
         return true;
+    }
+}
+
+Cards::~Cards(){
+    while(top_!=nullptr){
+        top_=top_->next;
     }
 }
