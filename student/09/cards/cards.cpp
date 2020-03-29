@@ -90,16 +90,25 @@ void Cards::print_from_bottom_to_top(std::ostream &s){
     s<<i<<": "<<top_->data<<std::endl;
 }
 
-bool Cards::remove(int &id){
-    id=top_->data;
-    if(top_->data==bot_->data){
-        top_=nullptr;
-        bot_=nullptr;
+bool Cards::remove(int &id) {
+    if ( top_ == nullptr ) {
         return false;
-    }else{
-        top_=top_->next;
-        return true;
     }
+
+    Card_data* card_remove = top_;
+
+    id = card_remove->data;
+
+    if (top_->data == bot_->data) {
+        top_ = nullptr;
+        bot_ = nullptr;
+    } else {
+        top_ = top_->next;
+    }
+
+    delete card_remove;
+
+    return true;
 }
 
 Cards::~Cards(){
