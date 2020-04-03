@@ -88,7 +88,7 @@ int main() {
         if(pieces.size() == 0){
             continue;
         }
-        int index = 0 ;
+        unsigned int index = 0 ;
 
         Command comPtr;
         //double result;
