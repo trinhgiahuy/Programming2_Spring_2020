@@ -97,14 +97,19 @@ int main() {
         if (command_to_be_executed.length()!= 1){
              std::transform(command_to_be_executed.begin(), command_to_be_executed.end(),command_to_be_executed.begin(), ::toupper);
         }
-        if(command_to_be_executed=="STOP"&& pieces.size()==1){
+        if((command_to_be_executed=="STOP" && pieces.size()==1)||(command_to_be_executed=="EXIT"&& pieces.size()==1)){
             cout<< GREETING_AT_END <<endl;
             break;
         }else{
 
 
+
         if(pieces.size()>3){
-            cout<<"Error: wrong number of parameters."<<endl;
+            if(pieces.size()==7){
+                cout<<"Error: unknown command."<<endl;
+               }else{
+                cout<<"Error: wrong number of parameters."<<endl;
+            }
         }else{
 
             for(auto x : COMMANDS){
@@ -135,9 +140,9 @@ int main() {
                 }
             }
         }
+       }
      }
    }
-}
 
 
 // This function exemplifies istringstreams.
