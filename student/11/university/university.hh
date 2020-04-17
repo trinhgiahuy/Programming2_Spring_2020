@@ -154,9 +154,12 @@ public:
      * Advances the date by 1 period length.
      */
     void advance_by_period(Params);
+
 private:
+
     // <Account number, Account*>
     std::map<int, Account*> accounts_;
+
     // <Course code, Course*>
     std::map<std::string, Course*> courses_;
 

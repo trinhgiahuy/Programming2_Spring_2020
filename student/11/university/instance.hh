@@ -80,7 +80,11 @@ public:
      * @return the date of the instance
      */
     Date get_date();
-
+    /**
+     * @brief check if the student has signed up for that instance or not
+     * @param signup iterator that point to sign up student
+     * @return true if that student has signed up for that instance or false otherwiese
+     */
     bool check_account(Account *signup);
 
 private:

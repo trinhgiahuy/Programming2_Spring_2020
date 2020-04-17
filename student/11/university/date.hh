@@ -47,6 +47,7 @@ public:
     bool operator<(const Date& rhs) const;
 
 private:
+
     unsigned int day_;
     unsigned int month_;
     unsigned int year_;

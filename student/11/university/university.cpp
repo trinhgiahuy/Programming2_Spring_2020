@@ -120,16 +120,19 @@ void University::add_instance(Params params)
 
 void University::sign_up_on_course(Params params)
 {
-    //examine the error course code
+    //examine the error cannot find the given course code
     if(courses_.find(params.at(0))==courses_.end()){
         std::cout<< CANT_FIND << params.at(0)<<std::endl;
         return;
     }
+
+    //examine the error cannot find the instance in course
      Course* temp_course_iter=courses_.at(params.at(0));
      if(!(temp_course_iter->has_instance(params.at(1)))){
         std::cout << CANT_FIND << params.at(1) << std::endl;
         return;
      }
+
      if(accounts_.find(stoi(params.at(2))) == accounts_.end()){
         std::cout << CANT_FIND << params.at(2) << std::endl;
         return;
@@ -139,25 +142,19 @@ void University::sign_up_on_course(Params params)
 
      Instance* iter = temp_course_iter->get_instance(params.at(1));
 
-     //examine the error already sign up
-//     if ((temp_account_iter->has_instace(params.at(1)))){
-//         std::cout << ALREADY_REGISTERED<<std::endl;
-//         return;
-//     }
+     //examine the error the student already sign up for the instance
      if(iter->check_account(temp_account_iter)){
-
          std::cout<< ALREADY_REGISTERED << std::endl;
          return;
      }
 
+     //execute the sign up for student
     if(!(iter->get_date() < utils::today) ){
-
         iter->add_student_to_instance(temp_account_iter);
         temp_account_iter->add_instance_to_student(temp_course_iter->get_instance(params.at(1)));
         std::cout<<SIGNED_UP<<std::endl;
 
     }else{
-
         //examine the error the sign up late
         std::cout<<LATE<<std::endl;
         return ;
@@ -167,16 +164,20 @@ void University::sign_up_on_course(Params params)
 
 void University::complete_course(Params params)
 {
-    //examine the error course code
+    //examine the error cannot find course code
     if(courses_.find(params.at(0))==courses_.end()){
         std::cout<< CANT_FIND << params.at(0)<<std::endl;
         return;
     }
+
+    //examine the error cannot find the instance of the course
      Course* temp_course_iter=courses_.at(params.at(0));
      if(!(temp_course_iter->has_instance(params.at(1)))){
         std::cout << CANT_FIND << params.at(1) << std::endl;
         return;
      }
+
+     //examine the error cannot find the student account
      if(accounts_.find(stoi(params.at(2))) == accounts_.end()){
         std::cout << CANT_FIND << params.at(2) << std::endl;
         return;
@@ -185,6 +186,7 @@ void University::complete_course(Params params)
      Account* temp_account_iter = accounts_.at(stoi(params.at(2)));
 
      Instance* iter = temp_course_iter->get_instance(params.at(1));
+
      //examine the error no sign up for instance
      if(!(iter->check_account(temp_account_iter))){
              std::cout<<NO_SIGNUPS<<std::endl;
