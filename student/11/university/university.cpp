@@ -170,17 +170,9 @@ void University::complete_course(Params params)
 
      Account* temp_account_iter=accounts_.at(stoi(params.at(2)));
 
-     Instance* iter = temp_course_iter->get_instance(params.at(1));
+     //Instance* iter = temp_course_iter->get_instance(params.at(1));
 
-    if(!(iter->get_date() < utils::today) ){
 
-        iter->add_student_to_instance(temp_account_iter);
-        temp_account_iter->add_instance_to_student(temp_course_iter->get_instance(params.at(1)));
-        std::cout<<SIGNED_UP<<std::endl;
-   }else{
-        std::cout<<LATE<<std::endl;
-        return ;
-   }
     std::cout<<COMPLETED<<std::endl;
 
         //erase the completed course from current_ vector
