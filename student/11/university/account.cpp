@@ -42,4 +42,17 @@ bool Account::has_instace(std::string name){
    return false;
 }
 
+void Account::erease_instance(Instance *instance_iter){
+   std::vector<Instance*>::iterator iter = std::find(current_.begin(), current_.end(), instance_iter);
+   if ( iter != current_.end() ){
+       current_.erase(iter);
+   }
+
+}
+
+void Account::add_complete(Course *iter){
+    completed_.push_back(iter);
+}
+
+
 

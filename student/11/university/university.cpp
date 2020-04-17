@@ -176,6 +176,14 @@ void University::complete_course(Params params)
         std::cout<<LATE<<std::endl;
         return ;
    }
+    std::cout<<COMPLETED<<std::endl;
+
+        //erase the completed course from current_ vector
+        temp_account_iter->erease_instance(temp_course_iter
+                                           ->get_instance(params.at(1)));
+
+        //add the completed course to complete_ vector
+        temp_account_iter->add_complete(temp_course_iter);
 
 }
 
