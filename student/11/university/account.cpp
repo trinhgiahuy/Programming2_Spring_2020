@@ -69,5 +69,20 @@ void Account::print_current(){
                 std::cout<<" "<<iter->get_name()<<std::endl;
     }
 }
+void Account::print_complete(){
+    std::cout<<"Completed: "<<std::endl;
+    for(auto iter: completed_){
+        iter->print_info(true);
+    }
+}
+
+int Account::get_complete_credit(){
+    int total_credit=0;
+    for(auto iter: completed_){
+        total_credit += iter->get_credits();
+    }
+    return total_credit;
+}
+
 
 

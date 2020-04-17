@@ -223,7 +223,16 @@ void University::print_study_state(Params params)
 
 void University::print_completed(Params params)
 {
+    //examine the error cannot find the matching student account
+    if(accounts_.find(stoi(params.at(0)))==accounts_.end()){
+        std::cout<<CANT_FIND<<params.at(0)<<std::endl;
+        return;
+    }
 
+    //print complete course data
+    Account* temp_account_iter=accounts_.at(stoi(params.at(0)));
+    temp_account_iter->print_complete();
+    std::cout<<"Total credits: "<<temp_account_iter->get_complete_credit()<<std::endl;
 }
 
 void University::set_date(Params params)
