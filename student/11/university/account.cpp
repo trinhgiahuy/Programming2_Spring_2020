@@ -1,3 +1,8 @@
+/* Name: Huy Trinh
+* Student number: 290290
+* UserID: bdgitr
+* E-Mail: giahuy.trinh@tuni.fi
+*/
 #include "account.hh"
 #include "utils.hh"
 #include "instance.hh"

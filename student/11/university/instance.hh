@@ -3,7 +3,11 @@
  * TIE-02201/TIE-02207 SPRING 2020
  * ----------
  * Class that represent a single instance.
- *
+ * Name: Huy Trinh
+ * Student number: 290290
+ * UserID: bdgitr
+ * E-Mail: giahuy.trinh@tuni.fi
+
  * Note: Students should make changes to this class, and add their info and
  * specifics of the class to this comment.
  * */

@@ -4,7 +4,11 @@
  * ----------
  * Class that represents a simple university with students, staff and courses
  * with instances.
- *
+ * Name: Huy Trinh
+ * Student number: 290290
+ * UserID: bdgitr
+ * E-Mail: giahuy.trinh@tuni.fi
+
  * Note: Students shouldn't need to make changes to the existing functions
  * or their implementations.
  * */

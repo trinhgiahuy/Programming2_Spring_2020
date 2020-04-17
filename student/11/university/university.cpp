@@ -1,3 +1,8 @@
+/* Name: Huy Trinh
+* Student number: 290290
+* UserID: bdgitr
+* E-Mail: giahuy.trinh@tuni.fi
+*/
 #include "university.hh"
 
 University::University():running_number_(111111)
@@ -189,6 +194,15 @@ void University::complete_course(Params params)
 
 void University::print_signups(Params params)
 {
+    //examine the error cannot find the matching course
+    if(courses_.find(params.at(0))==courses_.end()){
+        std::cout<<CANT_FIND<<params.at(0)<<std::endl;
+        return;
+    }
+
+    //print the sign up
+    Course* temp_course_iter = courses_.at(params.at(0));
+    temp_course_iter->print_signups();
 
 }
 

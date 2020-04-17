@@ -1,7 +1,12 @@
+
 /* Class: Account
   * ----------
   * Defines a student or a staff account in the university system.
-  *
+  ** Program author
+  * Name: Huy Trinh
+  * Student number: 290290
+  * UserID: bdgitr
+  * E-Mail: giahuy.trinh@tuni.fi
   * In the project, this class should be expanded to
   * include study history of the account.
   * */
