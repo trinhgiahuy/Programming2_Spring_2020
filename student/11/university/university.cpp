@@ -140,7 +140,7 @@ void University::sign_up_on_course(Params params)
      Instance* iter = temp_course_iter->get_instance(params.at(1));
 
      //examine the error already sign up
-     if ((temp_account_iter->has_instace(params.at(1)))){
+     if ((temp_account_iter->has_instace(params.at(1)))&&temp_course_iter->has_instance(params.at(1))){
          std::cout << ALREADY_REGISTERED<<std::endl;
          return;
      }
@@ -181,7 +181,7 @@ void University::complete_course(Params params)
 
      //Instance* iter = temp_course_iter->get_instance(params.at(1));
      //examine the error no sign up for instance
-     if(!(temp_account_iter->has_instace(params.at(1)))){
+     if(!(temp_account_iter->has_instace(params.at(1)))&&!(temp_course_iter->has_instance(params.at(1)))){
              std::cout<<NO_SIGNUPS<<std::endl;
              return;
          }
