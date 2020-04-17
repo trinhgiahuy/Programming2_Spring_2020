@@ -139,12 +139,21 @@ void University::sign_up_on_course(Params params)
 
      Instance* iter = temp_course_iter->get_instance(params.at(1));
 
+     //examine the error already sign up
+     if (!(temp_account_iter->has_instace(params.at(1)))){
+         std::cout << ALREADY_REGISTERED<<std::endl;
+         return;
+     }
+
     if(!(iter->get_date() < utils::today) ){
 
         iter->add_student_to_instance(temp_account_iter);
         temp_account_iter->add_instance_to_student(temp_course_iter->get_instance(params.at(1)));
         std::cout<<SIGNED_UP<<std::endl;
-   }else{
+
+    }else{
+
+        //examine the error the sign up late
         std::cout<<LATE<<std::endl;
         return ;
    }
@@ -153,34 +162,70 @@ void University::sign_up_on_course(Params params)
 
 void University::complete_course(Params params)
 {
-    //examine the error course code
+//    //examine the error course code
+//    if(courses_.find(params.at(0))==courses_.end()){
+//        std::cout<< CANT_FIND << params.at(0)<<std::endl;
+//        return;
+//    }
+//     Course* temp_course_iter=courses_.at(params.at(0));
+//     if(!(temp_course_iter->has_instance(params.at(1)))){
+//        std::cout << CANT_FIND << params.at(1) << std::endl;
+//        return;
+//     }
+//     if(accounts_.find(stoi(params.at(2))) == accounts_.end()){
+//        std::cout << CANT_FIND << params.at(2) << std::endl;
+//        return;
+//     }
+
+//     Account* temp_account_iter=accounts_.at(stoi(params.at(2)));
+
+//     //Instance* iter = temp_course_iter->get_instance(params.at(1));
+
+
+//    std::cout<<COMPLETED<<std::endl;
+
+//        //erase the completed course from current_ vector
+//        temp_account_iter->erease_instance(temp_course_iter
+//                                           ->get_instance(params.at(1)));
+
+//        //add the completed course to complete_ vector
+//        temp_account_iter->add_complete(temp_course_iter);
+
+    //examine the error cannot find the matching course name
     if(courses_.find(params.at(0))==courses_.end()){
-        std::cout<< CANT_FIND << params.at(0)<<std::endl;
+        std::cout<<CANT_FIND<<params.at(0)<<std::endl;
         return;
     }
-     Course* temp_course_iter=courses_.at(params.at(0));
-     if(!(temp_course_iter->has_instance(params.at(1)))){
-        std::cout << CANT_FIND << params.at(1) << std::endl;
+    Course* temp_course_iter = courses_.at(params.at(0));
+
+    //examine the error cannot find the matching couse instance
+    if(temp_course_iter->has_instance(params.at(1))!=true){
+        std::cout<<CANT_FIND<<params.at(1)<<std::endl;
         return;
-     }
-     if(accounts_.find(stoi(params.at(2))) == accounts_.end()){
-        std::cout << CANT_FIND << params.at(2) << std::endl;
+    }
+
+    //examine the error cannot find the matching student account
+    if(accounts_.find(stoi(params.at(2))) == accounts_.end()){
+        std::cout<<CANT_FIND<<params.at(2)<<std::endl;
         return;
-     }
+    }
+     Account* temp_account_iter = accounts_.at(stoi(params.at(2)));
 
-     Account* temp_account_iter=accounts_.at(stoi(params.at(2)));
-
-     //Instance* iter = temp_course_iter->get_instance(params.at(1));
-
+     //examine the error no sign up for instance
+    if(!(temp_account_iter->has_instace(params.at(1)))){
+        std::cout<<NO_SIGNUPS<<std::endl;
+        return;
+    }
 
     std::cout<<COMPLETED<<std::endl;
 
-        //erase the completed course from current_ vector
-        temp_account_iter->erease_instance(temp_course_iter
-                                           ->get_instance(params.at(1)));
+    //erase the completed course from current_ vector
+    temp_account_iter->erease_instance(temp_course_iter
+                                       ->get_instance(params.at(1)));
 
-        //add the completed course to complete_ vector
-        temp_account_iter->add_complete(temp_course_iter);
+    //add the completed course to complete_ vector
+    temp_account_iter->add_complete(temp_course_iter);
+
 
 }
 

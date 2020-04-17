@@ -68,9 +68,9 @@ void Account::print_current(){
         temp_course_instant->print_info(false);
                 std::cout<<" "<<iter->get_name()<<std::endl;
     }
+    std::cout << "Completed: " << std::endl;
 }
 void Account::print_complete(){
-    std::cout<<"Completed: "<<std::endl;
     for(auto iter: completed_){
         iter->print_info(true);
     }
