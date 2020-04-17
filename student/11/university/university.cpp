@@ -144,7 +144,7 @@ void University::sign_up_on_course(Params params)
 //         std::cout << ALREADY_REGISTERED<<std::endl;
 //         return;
 //     }
-     if(iter->check_account(stoi(params.at(2)))){
+     if(iter->check_account(temp_account_iter)){
 
          std::cout<< ALREADY_REGISTERED << std::endl;
          return;
@@ -186,7 +186,7 @@ void University::complete_course(Params params)
 
      Instance* iter = temp_course_iter->get_instance(params.at(1));
      //examine the error no sign up for instance
-     if(!(iter->check_account(stoi(params.at(2))))){
+     if(!(iter->check_account(temp_account_iter))){
              std::cout<<NO_SIGNUPS<<std::endl;
              return;
          }

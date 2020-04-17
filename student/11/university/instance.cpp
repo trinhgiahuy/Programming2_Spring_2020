@@ -28,10 +28,10 @@ Date Instance::get_date()
     return instance_date;
 }
 
-bool Instance::check_account(const int account_num)
+bool Instance::check_account(Account *signup)
 {
     for(auto iter : students_vct){
-        if(iter->get_account_number()==account_num){
+        if(iter == signup){
             return true;
         }
     }
