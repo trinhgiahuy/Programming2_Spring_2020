@@ -60,4 +60,14 @@ void Account::add_complete(Course *iter){
 }
 
 
+void Account::print_current(){
+    std::cout<<"Current:"<<std::endl;
+    for(auto iter : current_){
+        Course* temp_course_instant=iter->get_course_iter();
+        //print current course'data in one line
+        temp_course_instant->print_info(false);
+                std::cout<<" "<<iter->get_name()<<std::endl;
+    }
+}
+
 

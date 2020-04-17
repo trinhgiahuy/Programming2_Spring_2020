@@ -208,6 +208,16 @@ void University::print_signups(Params params)
 
 void University::print_study_state(Params params)
 {
+    //examine the error cannot find the matching student account
+    if(accounts_.find(stoi(params.at(0)))==accounts_.end()){
+        std::cout<<CANT_FIND<<params.at(0)<<std::endl;
+        return;
+    }
+
+    //print the study state data of account
+    Account* temp_account_iter = accounts_.at(stoi(params.at(0)));
+    temp_account_iter->print_current();
+    print_completed(params);
 
 }
 
