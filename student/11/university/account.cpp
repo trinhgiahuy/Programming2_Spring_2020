@@ -76,6 +76,11 @@ void Account::print_complete(){
     }
 }
 
+const int Account::get_account_number()
+{
+    return account_number_;
+}
+
 int Account::get_complete_credit(){
     int total_credit=0;
     for(auto iter: completed_){

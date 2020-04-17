@@ -81,6 +81,7 @@ public:
      */
     Date get_date();
 
+    bool check_account(const int account_num);
 
 private:
     /**

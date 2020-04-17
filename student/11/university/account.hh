@@ -89,6 +89,7 @@ public:
      */
     void print_complete();
 
+    const int get_account_number();
 private:
 
     std::string full_name_;
