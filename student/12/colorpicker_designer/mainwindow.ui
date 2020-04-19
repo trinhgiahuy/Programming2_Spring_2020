@@ -17,7 +17,7 @@
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>10</x>
       <y>80</y>
       <width>211</width>
       <height>101</height>
@@ -84,7 +84,7 @@
    <widget class="QSpinBox" name="spinBoxRed">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>230</x>
       <y>80</y>
       <width>49</width>
       <height>29</height>
@@ -94,7 +94,7 @@
    <widget class="QSpinBox" name="spinBoxGreen">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>230</x>
       <y>110</y>
       <width>49</width>
       <height>29</height>
@@ -104,7 +104,7 @@
    <widget class="QSpinBox" name="spinBoxBlue">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>230</x>
       <y>140</y>
       <width>49</width>
       <height>29</height>
@@ -136,50 +136,50 @@
  <resources/>
  <connections>
   <connection>
-   <sender>horizontalSliderRed</sender>
+   <sender>spinBoxRed</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBoxRed</receiver>
+   <receiver>horizontalSliderRed</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>161</x>
-     <y>135</y>
+     <x>293</x>
+     <y>140</y>
     </hint>
     <hint type="destinationlabel">
-     <x>310</x>
-     <y>139</y>
+     <x>225</x>
+     <y>134</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>horizontalSliderGreen</sender>
+   <sender>spinBoxGreen</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBoxGreen</receiver>
+   <receiver>horizontalSliderGreen</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>176</x>
-     <y>167</y>
+     <x>291</x>
+     <y>175</y>
     </hint>
     <hint type="destinationlabel">
-     <x>308</x>
-     <y>171</y>
+     <x>190</x>
+     <y>165</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>horizontalSliderBlue</sender>
+   <sender>spinBoxBlue</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBoxBlue</receiver>
+   <receiver>horizontalSliderBlue</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>208</x>
-     <y>201</y>
+     <x>286</x>
+     <y>203</y>
     </hint>
     <hint type="destinationlabel">
-     <x>301</x>
-     <y>201</y>
+     <x>194</x>
+     <y>203</y>
     </hint>
    </hints>
   </connection>
