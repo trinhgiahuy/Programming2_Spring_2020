@@ -61,7 +61,9 @@ void MainWindow::searching()
             }
 
             std::string line = "";
-            std::getline(file, line);
+            std::getline(file, line);   //file : object of istream class and tells the function about the stream
+                                        //from where to read the input from.
+                                        //and store input to line
 
             while (line != "")
             {
