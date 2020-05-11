@@ -1,3 +1,9 @@
+/* Course: TIE-02201 : Programming 2
+ * Name: Trinh Gia Huy
+ * Student nuber: 290290
+ * UserId : bdgitr
+ * Email: giahuy.trinh@tuni.fi
+ */
 #ifndef TETRISBLOCK_HH
 #define TETRISBLOCK_HH
 #include <QGraphicsRectItem>
