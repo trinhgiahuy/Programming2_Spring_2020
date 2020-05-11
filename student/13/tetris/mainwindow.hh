@@ -29,6 +29,16 @@ private slots:
         void newTetris();
         void getPosition();
         void showTetris();
+        void drawNextTetris();
+        bool canMoveDown();
+        bool canMoveLeft();
+        bool canMoveRight();
+        void automaticDrop();
+        void moveLeft();
+        void moveRight();
+        void moveDown();
+        bool rotation_calculation();
+        void rotate();
 
 private:
     Ui::MainWindow *ui;

@@ -263,6 +263,311 @@ void MainWindow::showTetris()
         }
     }
 }
+/**
+ * @brief A function will automatic create new
+ * Tetris block
+ */
+void MainWindow::automaticDrop()
+{
+    if (canMoveDown())
+    {
+        moveDown();
+    }
+    else
+    {
+        timer_.stop();
+        updateGame();
+    }
+}
+
+/**
+ * @brief Function control Tetris block to move leftward
+ */
+void MainWindow::moveLeft()
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        currentTetris.squares.at(i).block->moveBy(-SQUARE_SIDE, 0);
+        --currentTetris.squares.at(i).pos.x;
+    }
+
+    --leftLimit;
+    --rightLimit;
+}
+
+/**
+ * @brief Function control Tetris block to move rightward
+ */
+void MainWindow::moveRight()
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        currentTetris.squares.at(i).block->moveBy(SQUARE_SIDE, 0);
+        ++currentTetris.squares.at(i).pos.x;
+    }
+
+    ++leftLimit;
+    ++rightLimit;
+}
+
+/**
+ * @brief Function control Tetris block to move downward
+ */
+void MainWindow::moveDown()
+{
+    for (unsigned int i = 0; i < 4; ++i)
+    {
+       currentTetris.squares.at(i).block->moveBy(0, SQUARE_SIDE);
+       ++currentTetris.squares.at(i).pos.y;
+    }
+
+    ++bottomLimit;
+    ++upLimit;
+
+}
+
+/**
+ * @brief The function check if the block can rotate
+ * @return true if it can or false otherwise
+ */
+bool MainWindow::rotation_calculation()
+{
+    std::vector<Coord> rotation_result;
+    std::vector<std::pair<double, double>> coord_conversion;
+    std::pair<double, double> rotation_center = std::make_pair(0, 0);
+
+    // Convert coordinates to real number.
+    for (int i = 0; i < 4; ++i)
+    {
+        Coord alterCoordinate(currentTetris.squares.at(i).pos);
+        coord_conversion.push_back(std::make_pair(alterCoordinate.x + 0.5, alterCoordinate.y + 0.5));
+        rotation_center.first += coord_conversion.at(i).first;
+        rotation_center.second += coord_conversion.at(i).second;
+    }
+
+    rotation_center.first /= 4;
+    rotation_center.second /= 4;
+
+    //  Convert coordinate back to integer.
+    for (int i = 0; i < 4; ++i)
+    {
+        Coord alterCoordinate;
+        alterCoordinate.x = ceil(rotation_center.first +
+            (coord_conversion.at(i).second - rotation_center.second)) - 1;
+
+        alterCoordinate.y = ceil(rotation_center.second -
+            (coord_conversion.at(i).first - rotation_center.first)) - 1;
+
+        rotation_result.push_back(alterCoordinate);
+    }
+
+    bool can_rotate = true;
+    for (int i = 0; i < 4; ++i)
+    {
+        Coord alterCoordinate(rotation_result.at(i));
+
+        // Check the outermost left limit
+        if (alterCoordinate.x < 0)
+        {
+            can_rotate = false;
+            break;
+        }
+
+        // Check the outermost right limit
+        if (alterCoordinate.x >= COLUMNS)
+        {
+            can_rotate = false;
+            break;
+        }
+
+        // Check the outermost downward limit
+        if (alterCoordinate.y < 0)
+        {
+            can_rotate = false;
+            break;
+        }
+
+        // Check the outermost upward limit
+        if (alterCoordinate.y >= ROWS)
+        {
+            can_rotate = false;
+            break;
+        }
+
+        // There there is other Tetris.
+        if (gameBoard.at(alterCoordinate.y).at(alterCoordinate.x).block!= NULL)
+        {
+            can_rotate = false;
+            break;
+        }
+    }
+
+    if (can_rotate)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            currentTetris.squares.at(i).pos.x = rotation_result.at(i).x;
+            currentTetris.squares.at(i).pos.y = rotation_result.at(i).y;
+        }
+    }
+
+    return can_rotate;
+}
+
+/**
+ * @brief The function rotate the Retris counter clock wise
+ */
+void MainWindow::rotate()
+{
+
+    if (!rotation_calculation())
+    {
+        return;
+    }
+
+    int new_bottom = -1;
+    int new_up = ROWS;
+    int new_left = COLUMNS;
+    int new_right = -1;
+
+    for (int i = 0; i < 4; ++i)
+    {
+        if (currentTetris.squares.at(i).pos.y < new_up)
+        {
+            new_up = currentTetris.squares.at(i).pos.y;
+        }
+
+        if (currentTetris.squares.at(i).pos.y > new_bottom)
+        {
+            new_bottom = currentTetris.squares.at(i).pos.y;
+        }
+
+        if (currentTetris.squares.at(i).pos.x < new_left)
+        {
+            new_left = currentTetris.squares.at(i).pos.x;
+        }
+
+        if (currentTetris.squares.at(i).pos.x > new_right)
+        {
+            new_right = currentTetris.squares.at(i).pos.x;
+        }
+
+        currentTetris.squares.at(i).block->setPos(currentTetris.squares.at(i).pos.x * SQUARE_SIDE,
+                                                    currentTetris.squares.at(i).pos.y * SQUARE_SIDE);
+    }
+
+    // Update the Tetris
+    bottomLimit = new_bottom;
+    upLimit = new_up;
+    rightLimit = new_right;
+    leftLimit = new_left;
+}
+
+/**
+ * @brief The function check that whether the Tetris block can move down
+ * or not
+ * @return true if it can or false otherwise
+ */
+bool MainWindow::canMoveDown()
+{
+    //Check that the Tetris cannot be move down
+    if (bottomLimit + 1 >= ROWS)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < 4; ++i)
+    {
+        Coord alterCoordinate(currentTetris.squares.at(i).pos);
+
+        if (gameBoard.at(alterCoordinate.y + 1).at(alterCoordinate.x).block!= NULL)
+        {
+            return false;
+        }
+    }
+
+    //Else it can still move downward
+    return true;
+}
+
+/**
+ * @brief The function check that whether the Tetris block can move left
+ * or not
+ * @return true if it can and false otherwise
+ */
+bool MainWindow::canMoveLeft()
+{
+    // Check the outermost left limit
+    if (leftLimit - 1 < 0)
+    {
+        return false;
+    }
+
+    // There are other Tetriss on the left.
+    for (int i = 0; i < 4; ++i)
+    {
+        int x_index = currentTetris.squares.at(i).pos.x;
+        int y_index = currentTetris.squares.at(i).pos.y;
+
+        if (gameBoard.at(y_index).at(x_index - 1).block!= NULL)
+        {
+            return false;
+        }
+    }
+
+    // The Tetris can move to the left.
+    return true;
+}
+
+/**
+ * @brief The function check that whether the Tetris block can move right
+ * or not
+ * @return true if it can and false otherwise
+ */
+bool MainWindow::canMoveRight()
+{
+    //  Check the outermost right limit
+    if (rightLimit + 1 >= COLUMNS)
+    {
+        return false;
+    }
+
+    // There are other Tetriss on the right.
+    for (int i = 0; i < 4; ++i)
+    {
+        int x_index = currentTetris.squares.at(i).pos.x;
+        int y_index = currentTetris.squares.at(i).pos.y;
+
+        if (gameBoard.at(y_index).at(x_index + 1).block!= NULL)
+        {
+            return false;
+        }
+    }
+
+    // The Tetris can move to the left
+    return true;
+}
+/**
+ * @brief A function that will draw Next Tetris
+ */
+void MainWindow::drawNextTetris()
+{
+    nextScene->clear();
+
+    for (int i = 0; i < 4; ++i)
+    {
+        nextTetris.squares.at(i).pos.x = coordinateData.at(nextTetris.type).at(i).x;
+        nextTetris.squares.at(i).pos.y = coordinateData.at(nextTetris.type).at(i).y;
+
+        nextTetris.squares.at(i).block = nextScene->addRect(0, 0, SQUARE_SIDE / 1.2,
+                                SQUARE_SIDE / 1.2,QPen(), QBrush(nextTetris.color));
+        Coord alterCoordinate(nextTetris.squares.at(i).pos);
+        nextTetris.squares.at(i).block->setPos(alterCoordinate.x * SQUARE_SIDE + 30,
+                                               alterCoordinate.y * SQUARE_SIDE + 10);
+    }
+
+}
+
 
 
 
