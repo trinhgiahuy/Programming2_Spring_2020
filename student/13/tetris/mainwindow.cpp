@@ -107,3 +107,162 @@ void MainWindow::setInitialGame()
     nextTetris.color = colorData.at(colorIndex);
 }
 
+/**
+ * @brief A function control the input from the keyboard
+ * @param event
+ */
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+
+    if (event->key() == Qt::Key_A)
+    {
+        if (canMoveLeft())
+        {
+           // Move to the left one square.
+           moveLeft();
+        }
+
+        return;
+    }
+
+    if (event->key() == Qt::Key_D)
+    {
+        if (canMoveRight())
+        {
+            // Move to the right one square.
+            moveRight();
+        }
+        return;
+    }
+
+    if (event->key() == Qt::Key_W)
+    {
+        // Rotation
+        rotate();
+        return;
+    }
+
+}
+
+/**
+ * @brief A function will create a new Tetris block
+ */
+void MainWindow::newTetris()
+{
+    // Getting information to make new Tetris.
+    currentTetris.type = nextTetris.type;
+    currentTetris.color = nextTetris.color;
+
+
+    for (int i = 0; i < 4; ++i)
+    {
+        currentTetris.squares.at(i).pos.x = coordinateData.at(currentTetris.type).at(i).x;
+        currentTetris.squares.at(i).pos.y = coordinateData.at(currentTetris.type).at(i).y;
+
+        bottomLimit = bottomData.at(currentTetris.type);
+        leftLimit = leftData.at(currentTetris.type);
+        rightLimit = rightData.at(currentTetris.type);
+        upLimit = upData.at(currentTetris.type);
+    }
+
+    // Set appearance position of new Tetris.
+    getPosition();
+
+    // Prepare information of the next Tetris.
+    nextTetris.type = distr(randomEng) % 7;
+    int colorIndex = distr(randomEng) % 5;
+    nextTetris.color = colorData.at(colorIndex);
+}
+
+/**
+ * @brief A function return a postion of
+ * the Tetris block
+ */
+
+void MainWindow::getPosition()
+{
+    // Make appearing option.
+
+    int deltaX = ((COLUMNS - 1) / 2) - (rightLimit - leftLimit) / 2;
+    for (int i = 0; i < 4; ++i)
+    {
+        currentTetris.squares.at(i).pos.x += deltaX;
+    }
+
+    leftLimit += deltaX;
+    rightLimit += deltaX;
+}
+/**
+ * @brief A function show the Tetris block
+ */
+void MainWindow::showTetris()
+{
+    if (!gameIsOver)
+    {
+        // Choosing color for new Tetris from the color of this level.
+
+        for (int i = 0; i < 4; ++i)
+        {
+            Coord alterCoordinate(currentTetris.squares.at(i).pos);
+            currentTetris.squares.at(i).block = Scene->addRect(0, 0, SQUARE_SIDE,
+                                                                  SQUARE_SIDE, QPen(Qt::black),
+                                                                  QBrush(currentTetris.color));
+
+            currentTetris.squares.at(i).block->setPos(alterCoordinate.x * SQUARE_SIDE,
+                                                        alterCoordinate.y * SQUARE_SIDE);
+        }
+    }
+    else
+    {
+        int moveUp = 1;
+        while (bottomLimit - moveUp >= 0)
+        {
+            bool found_suitable_position = true;
+            for (int i = 0; i < 4; ++i)
+            {
+                Coord alterCoordinate(currentTetris.squares.at(i).pos);
+                alterCoordinate.y -= moveUp;
+
+                // Check only part apper on the Scene.
+                if (alterCoordinate.y >= 0)
+                {
+                    if (gameBoard.at(alterCoordinate.y).at(alterCoordinate.x).block!= NULL)
+                    {
+                        found_suitable_position = false;
+                        break;
+                    }
+                }
+            }
+
+            if (found_suitable_position)
+            {
+                break;
+            }
+
+            // Try moving up one unit.
+            moveUp += 1;
+        }
+
+        if (bottomLimit - moveUp >= 0)
+        {
+            for (int i = 0; i < 4; ++i)
+            {
+                Coord alterCoordinate(currentTetris.squares.at(i).pos);
+
+                alterCoordinate.y -= moveUp;
+
+                if (alterCoordinate.y >= 0)
+                {
+                    gameBoard.at(alterCoordinate.y).at(alterCoordinate.x).block= Scene->addRect(0, 0,SQUARE_SIDE,
+                                        SQUARE_SIDE, QPen(), QBrush(currentTetris.squares.at(i).block->brush()));
+
+                    gameBoard.at(alterCoordinate.y).at(alterCoordinate.x).block->setPos(alterCoordinate.x * SQUARE_SIDE,
+                                                                                        alterCoordinate.y * SQUARE_SIDE);
+                }
+            }
+        }
+    }
+}
+
+
+

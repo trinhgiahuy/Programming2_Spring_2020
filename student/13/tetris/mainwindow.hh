@@ -24,6 +24,12 @@ private slots:
     //group of function display the window
     void setInitialWindow();
     void setInitialGame();
+
+    // group of function control the Tetris block
+        void newTetris();
+        void getPosition();
+        void showTetris();
+
 private:
     Ui::MainWindow *ui;
 
