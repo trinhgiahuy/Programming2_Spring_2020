@@ -86,28 +86,23 @@ void MainWindow::setInitialGame()
     bottomLimit = 0;
     currentTetris.color = nextTetris.color;
 
-
     // Time related information in the game.
     min = 0;
     sec = 0;
     hour = 0;
+    ui->lcdMin->display(0);
+    ui->lcdSec->display(0);
+    playSpeed = 800;
+    ui->startButton->setEnabled(true);
 
-     ui->lcdMin->display(0);
-     ui->lcdSec->display(0);
-     playSpeed = 800;
-
-     ui->startButton->setEnabled(true);
-
+    //set initial condition
     gameIsStarted = false;
     gameIsOver = false;
     gameIsRunning = false;
-
     canHold = true;
     isHoldEmpty = true;
     holdTetris.type = 0;
-
     nextTetris.type = distr(randomEng) % 7;
-
     int colorIndex = distr(randomEng) % 5;
     nextTetris.color = colorData.at(colorIndex);
 }
