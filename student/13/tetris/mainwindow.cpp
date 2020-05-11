@@ -568,6 +568,101 @@ void MainWindow::drawNextTetris()
 
 }
 
+void MainWindow::playingTime()
+{
+    sec+= 1;
+    min += sec / 60;
+    hour+= min/ 60;
+    min %= 60;
+    sec %= 60;
+    ui->lcdSec->setPalette(Qt::green);
+    ui->lcdMin->setPalette(Qt::red);
+    ui->lcdMin->display(min);
+    ui->lcdSec->display(sec);
+
+}
+/**
+ * @brief A functio update the game and control the flow
+ * of the game
+ */
+void MainWindow::updateGame()
+{
+    updateGameBoard();
+    continue_game();
+}
+
+/**
+ * @brief A function update the game board
+ */
+void MainWindow::updateGameBoard()
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        int x_index = currentTetris.squares.at(i).pos.x;
+        int y_index = currentTetris.squares.at(i).pos.y;
+
+        gameBoard.at(y_index).at(x_index).pos = Coord(x_index, y_index);
+        gameBoard.at(y_index).at(x_index).block= Scene->addRect(0, 0, SQUARE_SIDE,
+            SQUARE_SIDE, QPen(),QBrush(currentTetris.squares.at(i).block->brush()));
+
+        gameBoard.at(y_index).at(x_index).block->setPos(x_index * SQUARE_SIDE,
+                                                    y_index * SQUARE_SIDE);
+
+        Scene->removeItem(currentTetris.squares.at(i).block);
+    }
+}
+
+/**
+ * @brief A function help control the flow of the game
+ */
+void MainWindow::continue_game()
+{
+    newTetris();
+
+    if (isOver())
+    {
+        showTetris();
+        finishedGame();
+        return;
+    }
+
+    timer_.start(playSpeed);
+    canHold = true;
+    gameIsRunning = true;
+    showTetris();
+    drawNextTetris();
+}
+/**
+ * @brief A function that check the game ins over or not
+ * @return true if it is over or false ohterwise
+ */
+bool MainWindow::isOver()
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        Coord alterCoordinate(currentTetris.squares.at(i).pos);
+
+        if (gameBoard.at(alterCoordinate.y).at(alterCoordinate.x).block!= NULL)
+        {
+            gameIsOver = true;
+        }
+    }
+
+    return gameIsOver;
+}
+
+/**
+ * @brief The function that announce the game is over
+ * and print out message
+ */
+void MainWindow::finishedGame()
+{
+    gameRealTime.stop();
+    ui->gameMessage->setText("GAME FINISHED");
+    gameIsRunning = false;
+    ui->startButton->setText("PLAY AGAIN");
+    ui->startButton->setEnabled(true);
+}
 
 
 

@@ -40,6 +40,12 @@ private slots:
         bool rotation_calculation();
         void rotate();
 
+    //group of function control the flow of game
+        void continue_game();
+        bool isOver();
+        void finishedGame();
+        void pauseGame();
+
 private:
     Ui::MainWindow *ui;
 
