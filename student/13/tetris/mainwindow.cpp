@@ -547,6 +547,7 @@ bool MainWindow::canMoveRight()
     // The Tetris can move to the left
     return true;
 }
+
 /**
  * @brief A function that will draw Next Tetris
  */
@@ -568,6 +569,9 @@ void MainWindow::drawNextTetris()
 
 }
 
+/**
+ * @brief A function hellp caculating playing time
+ */
 void MainWindow::playingTime()
 {
     sec+= 1;
@@ -632,6 +636,7 @@ void MainWindow::continue_game()
     showTetris();
     drawNextTetris();
 }
+
 /**
  * @brief A function that check the game ins over or not
  * @return true if it is over or false ohterwise
@@ -663,6 +668,91 @@ void MainWindow::finishedGame()
     ui->startButton->setText("PLAY AGAIN");
     ui->startButton->setEnabled(true);
 }
+/**
+ * @brief A slot control the start button
+ */
+
+void MainWindow::on_startButton_clicked()
+{
+    setInitialGame();
+
+    ui->startButton->setDisabled(true);
+    ui->gameMessage->setText("GAME STARTED");
+
+    gameIsStarted = true;
+    gameIsRunning = true;
+    gameRealTime.start(1000);
+
+    if (automaticMode)
+    {
+        continue_game();
+    }
+}
+
+/**
+ * @brief A slot control left button
+ */
+void MainWindow::on_leftButton_clicked()
+{
+    if (canMoveLeft()){
+        moveLeft();
+    }
+    else{
+        return;
+    }
+}
+
+/**
+ * @brief A slot control right button
+ */
+void MainWindow::on_rightButton_clicked()
+{
+    if (canMoveRight() ){
+        moveRight();
+    }else{
+        return;
+    }
+
+}
+
+/**
+ * @brief A slot control rotate button
+ */
+void MainWindow::on_rotatePushButton_clicked()
+{
+    if (canMoveDown()||canMoveLeft()||canMoveRight()){
+        rotate();
+    }
+}
+
+/**
+ * @brief A slot connect to a pause signal from
+ * Pause button
+ */
+void MainWindow::pauseGame()
+{
+    if (isOver()){
+        ui->gameMessage->setText("GAME OVER");
+        return;
+    }
+    if (gameIsRunning){
+        ui->gameMessage->setText("GAME PAUSED");
+        ui->pausePushButton->setText("RESUME GAME");
+        timer_.stop();
+        gameRealTime.stop();
+        gameIsRunning = false;
+    }else{
+        ui->gameMessage->setText("GAME CONTINUING");
+        ui->pausePushButton->setText("PAUSE");
+        if (automaticMode){
+            //gameRealTime.start(playSpeed);
+            timer_.start(playSpeed);
+        }
+    gameRealTime.start(playSpeed);
+    gameIsRunning = true;
+    }
+}
+
 
 
 

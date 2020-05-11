@@ -24,6 +24,9 @@ private slots:
     //group of function display the window
     void setInitialWindow();
     void setInitialGame();
+    void playingTime();
+     void updateGame();
+     void updateGameBoard();
 
     // group of function control the Tetris block
         void newTetris();
@@ -45,6 +48,12 @@ private slots:
         bool isOver();
         void finishedGame();
         void pauseGame();
+
+    //group of function control button
+         void on_startButton_clicked();
+         void on_leftButton_clicked();
+         void on_rightButton_clicked();
+         void on_rotatePushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
