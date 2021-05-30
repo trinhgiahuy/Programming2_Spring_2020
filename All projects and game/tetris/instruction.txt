@@ -1,0 +1,60 @@
+/* Course: TIE-02201 : Programming 2
+ * Name: Trinh Gia Huy
+ * Student nuber: 290290
+ * UserId : bdgitr
+ * Email: giahuy.trinh@tuni.fi
+ */
+
+
+***Instruction:
+The Tetris game is like the original game version. 
+Note: However there has not been a function to remove the last row.
+
+
+***Key of Movement:
+W: ROTATE THE TETRIS BLOCK 
+A: MOVE LEFT
+D: MOVE RIGHT 
+
+
+***User interface:
+
+Start: to start the game
+Pause: to pause game
+Close: to quit the game
+<: MOVE LEFT
+>: MOVE RIGHT
+Rotate: ROTATE THE TERTIS BLOCK
+LCD Clock display the time
++A message update the game status
+
+***Game instruction:
+The player press the button "Start" to start the game and the digital clock start to count. Then the start button is disable. Then the user use keyboard (W/A/D) to control the Tetris block. Whenever the player want to pause the game, he/she can hit the "Pause" button and it change to "Resume" button , the clock stop. When the game is over, it print out the message and "start" button change to "Play again" which the player can reset the game.
+
+***Implemented features:
+Minimal required:
+- At start the game area is empty and it simply look like a square
+- There are 7 different kind of tetromino.
+- The game has a game area, where tetrominos fall directly downwards. Tetrominos can fall automatically one after the other.
+- The player can move falling tetrominos horizontally to the left and right. (A fallen or stopped tetromino is not be able to be moved horizontally.)
+- A tetromino stops if it hits the bottom of the game area or an earlier fallen tetromino.
+- When the game is over, the player is informed.
+- The fucntionality of the game has been documented.
+
+***Extra features:
+1. All seven different tetrominos have been implemented. (5 p.)
+2. A falling tetromino can be turned. This feature can be implemented as the rotation of 90 degrees, that of 270, i.e. -90 degrees, or a reflection. (A reflection may be the easiest choice, especially if you reflect with respect to a line, the slope of which is 1. Note that such a line is descending, when we are using a coordinate system, where y grows downwards.) (15 p.)
+3.A fallen or stopped tetromino can be moved horizontally, if this is otherwise possible and if the next tetromino has not yet appeared in the game area. (Still tetrominos cannot be on upon the other, nor they can go outside the game area.) (10 p.)
+5.The time used in the game is counted. For this extra feature, you have two choices, one of which will be evaluated:
+The time used is shown to the user at the end of the game. (5 p.)
+The time used so far is shown during the game. (10 p.)
+9.After the game ends (or anyway), it is possible to start the game again from the beginning without starting the program again. (5 p.)
+
+
+
+
+
+
+
+
+
